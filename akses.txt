@@ -1,0 +1,5 @@
+http://localhost/sigap/Admin/pages/auth/login.html
+http://localhost/sigap/Psikolog/index.html
+http://localhost/sigap/Landing%20Page/Landing_Page.html
+
+deployed contract: 0x6fA9F330498293EAA4F436C7b6151F141643Ee6C

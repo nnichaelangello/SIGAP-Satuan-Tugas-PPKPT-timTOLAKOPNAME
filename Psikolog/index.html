@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Login Dashboard Psikolog - SIGAP PPKPT">
+    <title>Login Psikolog - SIGAP PPKPT</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+    <link rel="stylesheet" href="../style.css" />
+    <link rel="stylesheet" href="assets/css/psikolog.css" />
+</head>
+
+<body class="psikolog-login-body">
+    <!-- Particles removed for cleaner look -->
+
+    <div class="login-container">
+        <div class="login-card">
+            <div class="login-header">
+                <div class="login-logo">
+                    <i class="fas fa-user-md"></i>
+                </div>
+                <h1>Dashboard Psikolog</h1>
+                <p class="login-subtitle">SIGAP PPKPT - Telkom University Surabaya</p>
+            </div>
+
+            <form id="loginForm" class="login-form" autocomplete="off">
+                <div class="form-group">
+                    <label for="email"><i class="fas fa-envelope"></i> Email</label>
+                    <input type="email" id="email" name="email" placeholder="psikolog@telkomuniversity.ac.id" required
+                        autocomplete="email" />
+                </div>
+
+                <div class="form-group">
+                    <label for="password"><i class="fas fa-lock"></i> Password</label>
+                    <div class="password-wrapper">
+                        <input type="password" id="password" name="password" placeholder="Masukkan password" required
+                            autocomplete="current-password" />
+                        <button type="button" class="toggle-password" aria-label="Toggle password visibility">
+                            <i class="fas fa-eye"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="error-message" id="loginError" role="alert">
+                    <i class="fas fa-exclamation-circle"></i>
+                    <span id="errorText"></span>
+                </div>
+
+                <button type="submit" class="btn-login" id="loginBtn">
+                    <span class="btn-text">Masuk</span>
+                    <div class="btn-loader" style="display:none;">
+                        <div class="spinner"></div>
+                    </div>
+                </button>
+            </form>
+
+            <div class="login-footer">
+                <a href="../Landing Page/Landing_Page.html" class="back-link">
+                    <i class="fas fa-arrow-left"></i> Kembali ke Beranda
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <script src="../index.js" defer></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const form = document.getElementById('loginForm');
+            const errorDiv = document.getElementById('loginError');
+            const errorText = document.getElementById('errorText');
+            const loginBtn = document.getElementById('loginBtn');
+            const togglePw = document.querySelector('.toggle-password');
+
+            togglePw?.addEventListener('click', () => {
+                const pw = document.getElementById('password');
+                const icon = togglePw.querySelector('i');
+                if (pw.type === 'password') {
+                    pw.type = 'text';
+                    icon.classList.replace('fa-eye', 'fa-eye-slash');
+                } else {
+                    pw.type = 'password';
+                    icon.classList.replace('fa-eye-slash', 'fa-eye');
+                }
+            });
+
+            form.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                errorDiv.style.display = 'none';
+
+                const email = document.getElementById('email').value.trim();
+                const password = document.getElementById('password').value;
+
+                if (!email || !password) {
+                    showError('Email dan password wajib diisi');
+                    return;
+                }
+
+                loginBtn.querySelector('.btn-text').style.display = 'none';
+                loginBtn.querySelector('.btn-loader').style.display = 'flex';
+                loginBtn.disabled = true;
+
+                try {
+                    const res = await fetch('../api/psikolog/login.php', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ email, password })
+                    });
+
+                    const data = await res.json();
+
+                    if (data.status === 'success') {
+                        localStorage.setItem('psikolog_csrf', data.csrf_token);
+                        localStorage.setItem('psikolog_data', JSON.stringify(data.data));
+                        window.location.href = 'pages/dashboard.html';
+                    } else {
+                        showError(data.message || 'Login gagal');
+                    }
+                } catch (err) {
+                    showError('Gagal terhubung ke server');
+                } finally {
+                    loginBtn.querySelector('.btn-text').style.display = 'inline';
+                    loginBtn.querySelector('.btn-loader').style.display = 'none';
+                    loginBtn.disabled = false;
+                }
+            });
+
+            function showError(msg) {
+                errorText.textContent = msg;
+                errorDiv.style.display = 'flex';
+            }
+        });
+    </script>
+</body>
+
+</html>

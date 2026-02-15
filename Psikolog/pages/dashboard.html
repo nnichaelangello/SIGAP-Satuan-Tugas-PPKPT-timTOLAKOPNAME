@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Dashboard Psikolog - SIGAP PPKPT">
+    <title>Dashboard Psikolog - SIGAP PPKPT</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+    <link rel="stylesheet" href="../../style.css" />
+    <link rel="stylesheet" href="../assets/css/psikolog.css" />
+</head>
+
+<body class="psikolog-body">
+    <!-- Sidebar -->
+    <aside class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <div class="sidebar-logo">
+                <i class="fas fa-user-md"></i>
+                <span>SIGAP Psikolog</span>
+            </div>
+            <button class="sidebar-toggle" id="sidebarToggle" aria-label="Toggle sidebar">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+
+        <div class="sidebar-profile">
+            <div class="profile-avatar" id="profileAvatar">
+                <i class="fas fa-user"></i>
+            </div>
+            <div class="profile-info">
+                <h4 id="profileName">Loading...</h4>
+                <span class="profile-role" id="profileSpecialization">Psikolog</span>
+            </div>
+        </div>
+
+        <nav class="sidebar-nav">
+            <a href="#" class="nav-link active" data-page="overview">
+                <i class="fas fa-th-large"></i>
+                <span>Overview</span>
+            </a>
+            <a href="#" class="nav-link" data-page="cases">
+                <i class="fas fa-folder-open"></i>
+                <span>Kasus Saya</span>
+            </a>
+            <a href="#" class="nav-link" data-page="schedule">
+                <i class="fas fa-calendar-alt"></i>
+                <span>Jadwal</span>
+            </a>
+        </nav>
+
+        <div class="sidebar-footer">
+            <button class="btn-logout" id="logoutBtn">
+                <i class="fas fa-sign-out-alt"></i>
+                <span>Keluar</span>
+            </button>
+        </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content" id="mainContent">
+        <!-- Top Bar -->
+        <header class="topbar">
+            <button class="mobile-toggle" id="mobileToggle">
+                <i class="fas fa-bars"></i>
+            </button>
+            <h2 class="page-title" id="pageTitle">Overview</h2>
+            <div class="topbar-right">
+                <span class="current-date" id="currentDate"></span>
+            </div>
+        </header>
+
+        <!-- Page: Overview -->
+        <section class="page-content active" id="page-overview">
+            <div class="stats-grid">
+                <div class="stat-card stat-primary">
+                    <div class="stat-icon"><i class="fas fa-folder-open"></i></div>
+                    <div class="stat-info">
+                        <h3 id="statTotal">0</h3>
+                        <p>Total Kasus</p>
+                    </div>
+                </div>
+                <div class="stat-card stat-warning">
+                    <div class="stat-icon"><i class="fas fa-spinner"></i></div>
+                    <div class="stat-info">
+                        <h3 id="statAktif">0</h3>
+                        <p>Kasus Aktif</p>
+                    </div>
+                </div>
+                <div class="stat-card stat-info">
+                    <div class="stat-icon"><i class="fas fa-clock"></i></div>
+                    <div class="stat-info">
+                        <h3 id="statMenunggu">0</h3>
+                        <p>Menunggu Konfirmasi</p>
+                    </div>
+                </div>
+                <div class="stat-card stat-danger">
+                    <div class="stat-icon"><i class="fas fa-exclamation-triangle"></i></div>
+                    <div class="stat-info">
+                        <h3 id="statDispute">0</h3>
+                        <p>Dispute</p>
+                    </div>
+                </div>
+                <div class="stat-card stat-success">
+                    <div class="stat-icon"><i class="fas fa-check-circle"></i></div>
+                    <div class="stat-info">
+                        <h3 id="statSelesai">0</h3>
+                        <p>Selesai</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Recent Cases -->
+            <div class="section-card">
+                <div class="section-header">
+                    <h3><i class="fas fa-list"></i> Kasus Terbaru</h3>
+                </div>
+                <div class="cases-table-wrapper">
+                    <table class="cases-table" id="recentCasesTable">
+                        <thead>
+                            <tr>
+                                <th>Kode Laporan</th>
+                                <th>Status</th>
+                                <th>Risiko</th>
+                                <th>Jadwal</th>
+                                <th>Aksi</th>
+                            </tr>
+                        </thead>
+                        <tbody id="recentCasesBody">
+                            <tr>
+                                <td colspan="5" class="empty-state">
+                                    <i class="fas fa-inbox"></i>
+                                    <p>Belum ada kasus yang di-assign</p>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- Page: Cases (My Cases Full List) -->
+        <section class="page-content" id="page-cases">
+            <div class="section-card">
+                <div class="section-header">
+                    <h3><i class="fas fa-folder-open"></i> Semua Kasus Saya</h3>
+                    <div class="filter-group">
+                        <select id="statusFilter" class="filter-select">
+                            <option value="">Semua Status</option>
+                            <option value="Dijadwalkan">Dijadwalkan</option>
+                            <option value="Konsultasi">Konsultasi</option>
+                            <option value="Menunggu_Konfirmasi">Menunggu Konfirmasi</option>
+                            <option value="Dispute">Dispute</option>
+                            <option value="Closed">Closed</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="cases-table-wrapper">
+                    <table class="cases-table" id="allCasesTable">
+                        <thead>
+                            <tr>
+                                <th>Kode</th>
+                                <th>Status</th>
+                                <th>Darurat</th>
+                                <th>Korban</th>
+                                <th>Tanggal</th>
+                                <th>Aksi</th>
+                            </tr>
+                        </thead>
+                        <tbody id="allCasesBody"></tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- Page: Schedule -->
+        <section class="page-content" id="page-schedule">
+            <div class="section-card">
+                <div class="section-header">
+                    <h3><i class="fas fa-calendar-alt"></i> Jadwal Pertemuan Saya</h3>
+                </div>
+                <div class="schedule-list" id="scheduleList">
+                    <div class="empty-state">
+                        <i class="fas fa-calendar-times"></i>
+                        <p>Belum ada jadwal pertemuan</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Modal: Case Detail & Notes Input -->
+        <div class="modal-overlay" id="caseModal" style="display:none;">
+            <div class="modal-content modal-large">
+                <div class="modal-header">
+                    <h3 id="modalTitle">Detail Kasus</h3>
+                    <button class="modal-close" id="modalClose"><i class="fas fa-times"></i></button>
+                </div>
+                <div class="modal-body" id="modalBody">
+                    <!-- Case details tab -->
+                    <div class="modal-tabs">
+                        <button class="tab-btn active" data-tab="detail">
+                            <i class="fas fa-info-circle"></i> Detail Kasus
+                        </button>
+                        <button class="tab-btn" data-tab="notes">
+                            <i class="fas fa-edit"></i> Input Catatan
+                        </button>
+                        <button class="tab-btn" data-tab="feedback">
+                            <i class="fas fa-comments"></i> Feedback
+                        </button>
+                    </div>
+
+                    <!-- Tab: Detail -->
+                    <div class="tab-content active" id="tab-detail">
+                        <div class="detail-grid" id="caseDetailGrid">
+                            <p class="loading-text">Memuat data...</p>
+                        </div>
+                    </div>
+
+                    <!-- Tab: Notes Input -->
+                    <div class="tab-content" id="tab-notes">
+                        <form id="notesForm" class="notes-form">
+                            <input type="hidden" id="notesLaporanId" />
+                            <input type="hidden" id="notesJadwalId" />
+                            <input type="hidden" id="notesCatatanId" />
+
+                            <div class="form-group">
+                                <label for="ringkasanKasus">
+                                    <i class="fas fa-file-alt"></i> Ringkasan Kasus <span class="required">*</span>
+                                </label>
+                                <textarea id="ringkasanKasus" rows="4" maxlength="500"
+                                    placeholder="Ringkasan singkat tentang kasus ini..." required></textarea>
+                                <small class="char-count"><span id="ringkasanCount">0</span>/500</small>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="detailKonsultasi">
+                                    <i class="fas fa-clipboard-list"></i> Detail Konsultasi <span
+                                        class="required">*</span>
+                                </label>
+                                <textarea id="detailKonsultasi" rows="6"
+                                    placeholder="Kronologi pertemuan, temuan penting, respon klien..."
+                                    required></textarea>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="rekomendasi">
+                                    <i class="fas fa-lightbulb"></i> Rekomendasi Tindak Lanjut
+                                </label>
+                                <textarea id="rekomendasi" rows="3"
+                                    placeholder="Saran tindak lanjut untuk klien..."></textarea>
+                            </div>
+
+                            <div class="form-group">
+                                <label><i class="fas fa-exclamation-circle"></i> Tingkat Risiko <span
+                                        class="required">*</span></label>
+                                <div class="risk-selector">
+                                    <label class="risk-option risk-low">
+                                        <input type="radio" name="tingkatRisiko" value="rendah" />
+                                        <span><i class="fas fa-circle"></i> Rendah</span>
+                                    </label>
+                                    <label class="risk-option risk-medium">
+                                        <input type="radio" name="tingkatRisiko" value="sedang" checked />
+                                        <span><i class="fas fa-circle"></i> Sedang</span>
+                                    </label>
+                                    <label class="risk-option risk-high">
+                                        <input type="radio" name="tingkatRisiko" value="tinggi" />
+                                        <span><i class="fas fa-circle"></i> Tinggi</span>
+                                    </label>
+                                    <label class="risk-option risk-critical">
+                                        <input type="radio" name="tingkatRisiko" value="kritis" />
+                                        <span><i class="fas fa-circle"></i> Kritis</span>
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div class="form-actions">
+                                <button type="button" class="btn-draft" id="saveDraftBtn">
+                                    <i class="fas fa-save"></i> Simpan Draft
+                                </button>
+                                <button type="submit" class="btn-submit">
+                                    <i class="fas fa-paper-plane"></i> Submit ke User
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+
+                    <!-- Tab: Feedback -->
+                    <div class="tab-content" id="tab-feedback">
+                        <div id="feedbackList" class="feedback-list">
+                            <p class="loading-text">Memuat feedback...</p>
+                        </div>
+
+                        <div id="disputeResponseForm" style="display:none;">
+                            <h4><i class="fas fa-reply"></i> Respon Dispute</h4>
+                            <div class="form-group">
+                                <textarea id="responPsikolog" rows="4"
+                                    placeholder="Jelaskan respon Anda terhadap dispute user..." required></textarea>
+                            </div>
+                            <button class="btn-submit" id="sendDisputeResponse">
+                                <i class="fas fa-paper-plane"></i> Kirim Respon & Revisi
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="../../index.js" defer></script>
+    <script src="../assets/js/psikolog.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Monitoring progress laporan PPKPT - Lacak status laporan Anda secara real-time">
+    <meta name="keywords" content="monitoring, tracking, laporan PPKPT, status laporan">
+    <title>Monitoring Progress Laporan - Satgas PPKPT</title>
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="../style.css" />
+    <link rel="stylesheet" href="../assets/css/skeleton.css" />
+    <link rel="stylesheet" href="../assets/css/micro-animations.css" />
+    <link rel="stylesheet" href="../FABsigap/fabsigap.css" />
+    <link rel="stylesheet" href="css/monitoring.css" />
+    <link rel="stylesheet" href="../ChatBot/chatbot.css" />
+
+    <!-- Critical CSS untuk animasi reveal -->
+    <style>
+        [data-reveal] {
+            opacity: 0;
+            transform: translateY(30px);
+        }
+    </style>
+</head>
+
+<body>
+    <a href="#main-content" class="skip-to-content">Skip to main content</a>
+
+    <!-- Background -->
+    <div class="particles-bg" id="particlesBg"></div>
+
+    <!-- Navbar -->
+    <nav class="navbar header-bg fixed-top" role="navigation" aria-label="Navigasi Utama">
+        <div class="main-container nav-content">
+            <a class="logo logo-flip" href="../Landing Page/Landing_Page.html">
+                <span class="logo-flip-front">SIGAP</span>
+                <span class="logo-flip-back"><img src="../Landing Page/assets/flip.png" alt="SIGAP"></span>
+            </a>
+
+            <div class="nav-links" id="primary-navigation">
+                <a class="nav-item" href="../About Page/about.html">TENTANG</a>
+                <a class="nav-item" href="../Wawasan/wawasan.html">WAWASAN</a>
+                <a class="nav-item active" href="monitoring.html">MONITORING</a>
+            </div>
+
+            <div class="nav-actions">
+                <button class="btn btn-outline-light js-lapor-monitoring"
+                    aria-label="Buka halaman pelaporan">LAPOR</button>
+            </div>
+
+            <button class="hamburger" aria-label="Buka menu" aria-controls="primary-navigation" aria-expanded="false">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="monitoring-hero header-bg section-padding" id="main-content">
+        <div class="main-container monitoring-hero-grid">
+            <div class="monitoring-hero-title reveal" data-reveal>
+                <h1 class="main-title">Monitoring Progress</h1>
+            </div>
+
+            <div class="monitoring-hero-video reveal" data-reveal>
+                <div class="video-card">
+                    <video autoplay loop muted playsinline class="hero-video" aria-label="Video panduan monitoring">
+                        <source src="assets/monitoringsearch.mp4" type="video/mp4">
+                        Browser Anda tidak mendukung video HTML5.
+                    </video>
+                </div>
+
+                <div class="info-card">
+                    <div class="info-icon">
+                        <i class="fas fa-lock"></i>
+                    </div>
+                    <div class="info-text">
+                        <strong>Keamanan Terjamin</strong>
+                        <p>Setiap data laporan dienkripsi dan dijaga kerahasiaannya sesuai standar keamanan Satgas
+                            PPKPT.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="monitoring-hero-desc reveal" data-reveal>
+                <p class="description">
+                    Pantau setiap tahapan penanganan laporan Anda secara transparan dan real-time.
+                    Dengan memasukkan kode unik yang telah diberikan, Anda dapat melihat perkembangan
+                    terkini dari proses investigasi, verifikasi, hingga tindak lanjut yang sedang
+                    dilakukan oleh tim Satgas PPKPT kami. Kami berkomitmen untuk memberikan layanan
+                    yang responsif, aman, dan terpercaya dalam setiap langkah penanganan kasus.
+                </p>
+                <div class="monitoring-badge">
+                    <i class="fas fa-shield-check"></i>
+                    <span>REAL-TIME TRACKING</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Konten Utama -->
+    <section class="monitoring-content section-padding">
+        <div class="main-container">
+            <!-- Search Card -->
+            <div class="search-card reveal" data-reveal>
+                <div class="search-header">
+                    <div class="search-icon">
+                        <i class="fas fa-search"></i>
+                    </div>
+                    <div class="search-text">
+                        <h2 class="search-title">Lacak Laporan Anda</h2>
+                        <p class="search-subtitle">Masukkan kode pelaporan atau Email untuk melihat detail progress
+                            penanganan kasus.</p>
+                    </div>
+                </div>
+
+                <div class="search-input-wrapper">
+                    <input type="text" id="reportIdInput" class="search-input"
+                        placeholder="Masukkan Kode Laporan atau Email" maxlength="100"
+                        aria-label="Kode laporan atau email" autocomplete="off" />
+                    <button id="searchBtn" class="search-btn" aria-label="Cari laporan">
+                        <span class="btn-text">Cek Progress</span>
+                        <i class="fas fa-arrow-right btn-icon"></i>
+                    </button>
+                </div>
+
+                <!-- Loader pencarian -->
+                <div class="search-loader-container" id="searchLoader">
+                    <div class="search-loader">
+                        <div class="loader"></div>
+                        <p class="loader-text">Mencari laporan...</p>
+                    </div>
+                </div>
+
+                <!-- Pesan error -->
+                <div class="error-message" id="errorMessage" role="alert" aria-live="assertive">
+                    <i class="fas fa-exclamation-circle"></i>
+                    <span id="errorText">ID Laporan tidak ditemukan.</span>
+                </div>
+            </div>
+
+            <!-- Loading Overlay -->
+            <div class="centered-loading-overlay" id="centeredLoadingOverlay" style="display: none;">
+                <div class="centered-cube-wrapper">
+                    <div class="cube">
+                        <div class="cube-faces">
+                            <div class="cube-face shadow"></div>
+                            <div class="cube-face bottom"></div>
+                            <div class="cube-face top"></div>
+                            <div class="cube-face left"></div>
+                            <div class="cube-face right"></div>
+                            <div class="cube-face back"></div>
+                            <div class="cube-face front"></div>
+                        </div>
+                    </div>
+                </div>
+                <p class="loading-text">Memuat progress laporan...</p>
+            </div>
+
+            <!-- Timeline Container -->
+            <div class="timeline-container" id="timelineContainer">
+                <div class="timeline-header" id="timelineHeader" style="display: none;">
+                    <div class="timeline-header-content">
+                        <h3 class="timeline-title" id="timelineTitle">Progress Laporan</h3>
+                        <div class="timeline-meta">
+                            <div class="meta-item">
+                                <i class="fas fa-tag"></i>
+                                <span id="timelineId">-</span>
+                            </div>
+                            <div class="meta-item">
+                                <i class="fas fa-calendar-alt"></i>
+                                <span id="timelineDate">-</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="timeline-status-badge" id="statusBadge">
+                        <i class="fas fa-clock"></i>
+                        <span id="statusText">Dalam Proses</span>
+                    </div>
+                </div>
+
+                <div class="timeline" id="timeline">
+                    <div class="timeline-placeholder">
+                        <div class="placeholder-icon">
+                            <i class="fas fa-clipboard-list"></i>
+                        </div>
+                        <h4>Belum Ada Laporan yang Ditampilkan</h4>
+                        <p>Masukkan kode laporan atau Email di atas untuk melihat detail progress penanganan.</p>
+                    </div>
+                </div>
+
+                <!-- Schedule Info Card (Phase 3) -->
+                <div class="phase-card" id="scheduleCard" style="display:none; margin-top: 2rem;">
+                    <div class="phase-card-header"
+                        style="background: #e0f2fe; color: #0284c7; padding: 1rem; border-radius: 8px 8px 0 0; display: flex; align-items: center; gap: 10px;">
+                        <i class="fas fa-calendar-alt"></i>
+                        <h4 style="margin: 0; font-size: 1.1rem;">Informasi Jadwal Pertemuan</h4>
+                    </div>
+                    <div class="phase-card-body" id="scheduleInfo"
+                        style="padding: 1.5rem; background: white; border: 1px solid #e0f2fe; border-top: none; border-radius: 0 0 8px 8px;">
+                    </div>
+                </div>
+
+                <!-- Consultation Notes Card (Phase 4) -->
+                <div class="phase-card" id="consultationCard" style="display:none; margin-top: 2rem;">
+                    <div class="phase-card-header"
+                        style="background: #fdf4ff; color: #c026d3; padding: 1rem; border-radius: 8px 8px 0 0; display: flex; align-items: center; gap: 10px;">
+                        <i class="fas fa-file-medical-alt"></i>
+                        <h4 style="margin: 0; font-size: 1.1rem;">Catatan Konsultasi</h4>
+                    </div>
+                    <div class="phase-card-body" id="consultationInfo"
+                        style="padding: 1.5rem; background: white; border: 1px solid #fdf4ff; border-top: none; border-radius: 0 0 8px 8px;">
+                    </div>
+                </div>
+
+                <!-- User Feedback / Confirmation (Phase 4-5) -->
+                <div class="phase-card" id="feedbackCard" style="display:none; margin-top: 2rem;">
+                    <div class="phase-card-header"
+                        style="background: #fff7ed; color: #ea580c; padding: 1rem; border-radius: 8px 8px 0 0; display: flex; align-items: center; gap: 10px;">
+                        <i class="fas fa-user-check"></i>
+                        <h4 style="margin: 0; font-size: 1.1rem;">Konfirmasi Data</h4>
+                    </div>
+                    <div class="phase-card-body"
+                        style="padding: 1.5rem; background: white; border: 1px solid #fff7ed; border-top: none; border-radius: 0 0 8px 8px;">
+                        <p class="phase-detail" id="feedbackPrompt" style="margin-bottom: 1rem;">Silakan tinjau catatan
+                            konsultasi di atas, kemudian konfirmasi atau ajukan keberatan.</p>
+
+                        <div class="feedback-form" id="feedbackForm">
+                            <input type="hidden" id="feedbackLaporanId" />
+                            <input type="hidden" id="feedbackCatatanId" />
+
+                            <div class="form-group" style="margin-bottom: 1rem;">
+                                <label style="display: block; margin-bottom: 0.5rem; font-weight: 500;">Komentar
+                                    (Opsional)</label>
+                                <textarea id="userKomentar" rows="3" class="u-full-width"
+                                    style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 6px;"
+                                    placeholder="Tambahkan catatan jika setuju..."></textarea>
+                            </div>
+
+                            <div class="form-group" id="disputeDetailGroup" style="display:none; margin-bottom: 1rem;">
+                                <label
+                                    style="display: block; margin-bottom: 0.5rem; font-weight: 500; color: #ef4444;">Detail
+                                    Keberatan <span style="color:red">*</span></label>
+                                <textarea id="disputeDetail" rows="3" class="u-full-width"
+                                    style="width: 100%; padding: 10px; border: 1px solid #ef4444; border-radius: 6px;"
+                                    placeholder="Jelaskan bagian mana yang tidak sesuai..."></textarea>
+                            </div>
+
+                            <div class="feedback-actions" style="display: flex; gap: 10px; margin-top: 1.5rem;">
+                                <button id="btnConfirm"
+                                    style="flex: 1; padding: 12px; background: #22c55e; color: white; border: none; border-radius: 6px; cursor: pointer; font-weight: 600;">
+                                    <i class="fas fa-check-circle"></i> Setuju & Selesai
+                                </button>
+                                <button id="btnDispute"
+                                    style="flex: 1; padding: 12px; background: #ef4444; color: white; border: none; border-radius: 6px; cursor: pointer; font-weight: 600;">
+                                    <i class="fas fa-exclamation-triangle"></i> Ajukan Keberatan
+                                </button>
+                            </div>
+
+                            <!-- Submit Dispute Button (Hidden initially) -->
+                            <button id="btnSubmitDispute"
+                                style="display: none; width: 100%; padding: 12px; background: #ef4444; color: white; border: none; border-radius: 6px; cursor: pointer; font-weight: 600; margin-top: 10px;">
+                                <i class="fas fa-paper-plane"></i> Kirim Keberatan
+                            </button>
+                            <button id="btnCancelDispute"
+                                style="display: none; width: 100%; padding: 8px; background: #ccc; color: #333; border: none; border-radius: 6px; cursor: pointer; margin-top: 5px;">
+                                Batal
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Audit Trail Card (Audit Log) -->
+                <div class="phase-card" id="auditTrailCard" style="display:none; margin-top: 2rem;">
+                    <div class="phase-card-header"
+                        style="background: #f1f5f9; color: #475569; padding: 1rem; border-radius: 8px 8px 0 0; display: flex; align-items: center; gap: 10px;">
+                        <div style="flex:1;">
+                            <h4 style="margin: 0; font-size: 1.1rem;">Riwayat Aktivitas & Perubahan Data</h4>
+                        </div>
+                        <div class="audit-filters" style="display:flex; gap:8px;">
+                            <button class="filter-btn active" onclick="filterAudit('all')"
+                                style="padding:4px 12px; font-size:0.8rem; border-radius:20px; border:1px solid #cbd5e1; background:white; cursor:pointer;">Semua</button>
+                            <button class="filter-btn" onclick="filterAudit('admin')"
+                                style="padding:4px 12px; font-size:0.8rem; border-radius:20px; border:1px solid #cbd5e1; background:white; cursor:pointer;">Admin</button>
+                            <button class="filter-btn" onclick="filterAudit('psikolog')"
+                                style="padding:4px 12px; font-size:0.8rem; border-radius:20px; border:1px solid #cbd5e1; background:white; cursor:pointer;">Psikolog</button>
+                        </div>
+                    </div>
+                    <div class="phase-card-body" id="auditTrailList"
+                        style="padding: 1.5rem; background: white; border: 1px solid #f1f5f9; border-top: none; border-radius: 0 0 8px 8px; max-height: 400px; overflow-y: auto;">
+                        <!-- Audit List Rendered Here -->
+                    </div>
+                </div>
+
+                <!-- Audit Detail Modal -->
+                <div id="auditDetailModal"
+                    style="display:none; position:fixed; z-index:9999; left:0; top:0; width:100%; height:100%; overflow:auto; background-color:rgba(19, 35, 56, 0.8); backdrop-filter:blur(5px); align-items:center; justify-content:center;">
+                    <div
+                        style="background-color:#fefefe; margin:auto; padding:0; border:0; width:90%; max-width:600px; border-radius:16px; box-shadow:0 25px 50px -12px rgba(0, 0, 0, 0.25); position:relative; overflow:hidden; animation: slideUp 0.3s ease-out;">
+                        <div
+                            style="padding:20px 24px; background: #f8fafc; border-bottom:1px solid #e2e8f0; display:flex; justify-content:between; align-items:center;">
+                            <h3 style="margin:0; font-family:'F37 Caslon'; font-size:1.25rem; color:#1e293b;">Detail
+                                Perubahan Data</h3>
+                            <button onclick="closeAuditModal()"
+                                style="background:none; border:none; font-size:1.5rem; color:#64748b; cursor:pointer;">&times;</button>
+                        </div>
+                        <div id="auditDiffContent" style="padding:24px; max-height:60vh; overflow-y:auto;">
+                            <!-- Diff Content -->
+                        </div>
+                        <div
+                            style="padding:16px 24px; background: #f8fafc; border-top:1px solid #e2e8f0; text-align:right;">
+                            <button onclick="closeAuditModal()"
+                                style="padding:8px 20px; background:#4b8a7b; color:white; border:none; border-radius:8px; font-weight:600; cursor:pointer;">Tutup</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="main-footer">
+        <div class="main-container footer-grid">
+            <div class="footer-col footer-logo-col">
+                <div class="footer-logo-section">
+                    <div class="footer-logo-wrapper">
+                        <img src="../Landing Page/assets/flip.png" alt="SIGAP Logo" class="footer-logo-img">
+                    </div>
+                    <p class="footer-satgas-text">Satuan Tugas PPKPT Telkom University Surabaya</p>
+                    <a href="https://www.instagram.com/satgasppks.tus" target="_blank" rel="noopener noreferrer"
+                        class="footer-instagram-link">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none"
+                            stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                            <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                            <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+            <div class="footer-col">
+                <h5>Halaman</h5>
+                <ul class="clean-list">
+                    <li><a href="../About Page/about.html">Tentang</a></li>
+                    <li><a href="../Wawasan/wawasan.html">Wawasan</a></li>
+                    <li><a href="monitoring.html">Monitoring</a></li>
+                </ul>
+            </div>
+            <div class="footer-col footer-back-top-col">
+                <button class="back-to-top-btn" aria-label="Kembali ke atas"
+                    onclick="window.scrollTo({top: 0, behavior: 'smooth'})">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M18 15l-6-6-6 6" />
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div class="main-container">
+                <small style="display: block; margin-bottom: 8px;">
+                    © 2026 Telkom University Surabaya. Design & Development by <strong>SIGAPTIM</strong>
+                </small>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Canvas untuk konfeti -->
+    <canvas id="confettiCanvas" class="confetti-canvas"></canvas>
+
+    <!-- Scripts -->
+    <script src="../index.js" defer></script>
+    <script src="../ChatBot/chat_storage.js"></script>
+    <script src="../ChatBot/chatbot.js"></script>
+    <script src="js/confetti.js"></script>
+    <script src="js/monitoring.js"></script>
+    <script src="../FABsigap/modules/breathing.js" defer></script>
+    <script src="../FABsigap/modules/text_to_speech.js" defer></script>
+    <script src="../FABsigap/fabsigap.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/sienna-accessibility@latest/dist/sienna-accessibility.umd.js"
+        defer></script>
+</body>
+
+</html>
