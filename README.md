@@ -30,28 +30,15 @@ Year: 2024-2025
 
 > *"Ruang aman untuk berbagi cerita dan melaporkan kekerasan seksual"*
 
-**Project Lead:** [Sulthonika Mahfudz Al Mujahidin](https://github.com/sulthonikamalm) · Telkom University Surabaya
+**Team Member:** 
+
+Sulthonika Mahfudz Al Mujahidin · Telkom University Surabaya
+
+Nur Alifia Rustan · Telkom University Surabaya
+
+Michael Angello Qadosy Riyadi · Telkom University Surabaya
 
 </div>
-
----
-
-## 📋 Daftar Isi
-
-<details open>
-<summary><b>Klik untuk membuka/tutup</b></summary>
-
-- [🎯 Tentang Proyek](#-tentang-proyek)
-- [✨ Fitur Unggulan](#-fitur-unggulan)
-- [🤖 TemanKu AI Chatbot](#-temanku-ai-chatbot)
-- [🛠️ Tech Stack](#️-tech-stack)
-- [🚀 Instalasi](#-instalasi)
-- [👨‍🏫 Dosen Pembimbing](#-dosen-pembimbing)
-- [👥 Tim Pengembang](#-tim-pengembang)
-- [📄 Lisensi](#-lisensi)
-- [📚 Citation](#-citation)
-
-</details>
 
 ---
 
@@ -64,7 +51,7 @@ Year: 2024-2025
 
 ### 🛡️ Apa itu SIGAP PPKPT?
 
-**SIGAP PPKPT** (Satuan Tugas Pencegahan dan Penanganan Kekerasan di Perguruan Tinggi) adalah platform digital inovatif yang dikembangkan oleh **Sulthonika Mahfudz Al Mujahidin** bersama tim mahasiswa **Telkom University Surabaya**.
+**SIGAP PPKPT** (Satuan Tugas Pencegahan dan Penanganan Kekerasan di Perguruan Tinggi) adalah platform digital inovatif yang dikembangkan oleh tim mahasiswa **Telkom University Surabaya** yang merupakan bagian dari project explorAItion
 
 Platform ini menyediakan ruang aman bagi korban dan saksi kekerasan seksual untuk melaporkan kejadian secara **anonim**, **terenkripsi**, dan **terpercaya**.
 
@@ -211,174 +198,6 @@ Bot: "Makasih udah mau cerita. Mau aku bantu bikin laporan?" + [Tombol Ya/Tidak]
 
 ---
 
-##  Instalasi
-
-<details>
-<summary><b>📋 Prasyarat</b></summary>
-
-- ✅ PHP 8.0 atau lebih tinggi
-- ✅ MySQL 5.7+ / MariaDB
-- ✅ XAMPP / WAMP / LAMP
-- ✅ Groq API Key
-- ✅ Web Browser Modern
-
-</details>
-
-### Langkah Instalasi
-
-```bash
-# 1. Clone repository
-git clone https://github.com/sulthonikamalm/sigap-ppkpt.git
-
-# 2. Pindah ke direktori proyek
-cd sigap-ppkpt
-
-# 3. Copy file environment
-cp .env.example .env
-
-# 4. Konfigurasi environment
-# Edit .env dengan database credentials dan Groq API key
-
-# 5. Import database
-mysql -u root -p < database/sigap_ppkpt.sql
-
-# 6. Jalankan di browser
-# http://localhost/sigap-ppkpt/
-```
-
----
-
-## 👨‍🏫 Dosen Pembimbing
-
-<div align="center">
-
-<table>
-<tr>
-<td align="center" width="50%">
-
-### 👩‍🏫 Dosen Pemrograman Web
-
-<img src="https://ui-avatars.com/api/?name=Mastuty+Ayu&background=15928c&color=fff&size=150&rounded=true&bold=true" width="100"/>
-
-**Mastuty Ayu Ningtyas, S.Kom., M.MT**
-
-*Dosen Pemrograman Web*
-
-<a href="https://scholar.google.com/citations?user=ild0R6EAAAAJ&hl=id">
-<img src="https://img.shields.io/badge/Google_Scholar-4285F4?style=flat-square&logo=google-scholar&logoColor=white" alt="Scholar"/>
-</a>
-
-</td>
-<td align="center" width="50%">
-
-### 👨‍🏫 Dosen Proyek TI
-
-<img src="https://ui-avatars.com/api/?name=Mustafa+Kamal&background=0947aa&color=fff&size=150&rounded=true&bold=true" width="100"/>
-
-**Mustafa Kamal, S.Kom., M.Kom**
-
-*Dosen Proyek Teknologi Informasi*
-
-<a href="https://scholar.google.com/citations?user=YxQhctcAAAAJ&hl=en">
-<img src="https://img.shields.io/badge/Google_Scholar-4285F4?style=flat-square&logo=google-scholar&logoColor=white" alt="Scholar"/>
-</a>
-
-</td>
-</tr>
-</table>
-
-</div>
-
----
-
-## 👥 Tim Pengembang
-
-<div align="center">
-
-### 🏆 SIGAP Development Team
-**Telkom University Surabaya - 2024/2025**
-
-<table>
-<tr>
-<td align="center" width="33%">
-
-<img src="https://ui-avatars.com/api/?name=Sulthonika&background=FFD700&color=000&size=100&rounded=true&bold=true" width="80"/>
-
-**👑 Sulthonika Mahfudz Al Mujahidin**
-
-`1202230023`
-
-[![Role](https://img.shields.io/badge/PROJECT_LEAD-FFD700?style=flat-square&logoColor=black)](/)
-[![Role](https://img.shields.io/badge/FULL_STACK_DEV-0947aa?style=flat-square)](/)
-[![Role](https://img.shields.io/badge/AI_ENGINEER-FF6B6B?style=flat-square)](/)
-
-*Lead Developer & AI Architect*
-
-</td>
-<td align="center" width="33%">
-
-<img src="https://ui-avatars.com/api/?name=Nur+Alifia&background=FF69B4&color=fff&size=100&rounded=true&bold=true" width="80"/>
-
-**Nur Alifia Rustan**
-
-`1202230008`
-
-[![Role](https://img.shields.io/badge/Developer-15928c?style=flat-square)](/)
-
-</td>
-<td align="center" width="33%">
-
-<img src="https://ui-avatars.com/api/?name=Davin+Syah&background=6BA3BE&color=fff&size=100&rounded=true&bold=true" width="80"/>
-
-**Davin Syah Putra Antoro**
-
-`1202230054`
-
-[![Role](https://img.shields.io/badge/Developer-15928c?style=flat-square)](/)
-
-</td>
-</tr>
-<tr>
-<td align="center" width="33%">
-
-<img src="https://ui-avatars.com/api/?name=Muhammad+Dwiky&background=0947aa&color=fff&size=100&rounded=true&bold=true" width="80"/>
-
-**Muhammad Dwiky Yanuarezza**
-
-`1202230031`
-
-[![Role](https://img.shields.io/badge/Developer-15928c?style=flat-square)](/)
-
-</td>
-<td align="center" width="33%">
-
-<img src="https://ui-avatars.com/api/?name=Teuku+Ismail&background=0C969C&color=fff&size=100&rounded=true&bold=true" width="80"/>
-
-**Teuku Ismail Syuhada**
-
-`1202230036`
-
-[![Role](https://img.shields.io/badge/Developer-15928c?style=flat-square)](/)
-
-</td>
-<td align="center" width="33%">
-
-<img src="https://ui-avatars.com/api/?name=Muhammad+Fajar&background=066bca&color=fff&size=100&rounded=true&bold=true" width="80"/>
-
-**Muhammad Fajar Shodiq**
-
-`1202230045`
-
-[![Role](https://img.shields.io/badge/Developer-15928c?style=flat-square)](/)
-
-</td>
-</tr>
-</table>
-
-</div>
-
----
-
 ## 🏛️ Institusi
 
 <div align="center">
@@ -386,8 +205,6 @@ mysql -u root -p < database/sigap_ppkpt.sql
 ### Telkom University Surabaya
 
 *Program Studi S1 Teknologi Informasi*
-
-**Tahun Akademik 2024/2025**
 
 ---
 
@@ -400,64 +217,12 @@ mysql -u root -p < database/sigap_ppkpt.sql
 
 ---
 
-## 📄 Lisensi
-
-<div align="center">
-
-Proyek ini dilisensikan di bawah **MIT License**
-
-```
-MIT License
-
-Copyright (c) 2024-2025 SIGAP Development Team
-Telkom University Surabaya
-
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
-```
-
-</div>
-
----
-
-## 📚 Citation
-
-Jika proyek ini membantu penelitian atau referensi Anda:
-
-```bibtex
-@software{sigap_ppkpt_2024,
-  author = {Sulthonika Mahfudz Al Mujahidin and SIGAP Development Team},
-  title = {SIGAP PPKPT: Platform Pelaporan Kekerasan Seksual dengan AI Chatbot},
-  year = {2024},
-  institution = {Telkom University Surabaya},
-  url = {https://github.com/sulthonikamalm/sigap-ppkpt}
-}
-```
-
----
-
 <div align="center">
 
 ### 💖 Dibuat dengan Cinta untuk Kemanusiaan
 
 <img src="https://capsule-render.vercel.app/api?type=waving&color=0:0947aa,50:15928c,100:6BA3BE&height=100&section=footer" width="100%"/>
 
-**[Sulthonika Mahfudz Al Mujahidin](https://github.com/sulthonikamalm)** & Tim  
-Telkom University Surabaya | 2024-2025
-
 **⭐ Jangan lupa beri bintang jika proyek ini bermanfaat!**
-
-<p>
-<a href="#-daftar-isi">
-<img src="https://img.shields.io/badge/🔝_Kembali_ke_Atas-15928c?style=for-the-badge" alt="Back to Top"/>
-</a>
-</p>
 
 </div>
